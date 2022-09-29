@@ -45,12 +45,6 @@
     <script src="<?= base_url()?>assets/vendors/js/tables/datatable/datatables.bootstrap4.min.js"></script>
 <script src="<?= base_url() ?>assets/js/scripts/datatables/datatable.js"></script>
 
-</body>
-<!-- END: Body-->
-
-</html>
-
-
     <script>
       	$(function() {
 			$('a').filter(function() {

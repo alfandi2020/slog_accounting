@@ -428,7 +428,7 @@
         $(document).on("click", "#submit_kas_keluar", function(e){
             e.preventDefault();
             var data = {
-                deskripsi:$('input[name="deskripsi"]').val(),
+                deskripsi:$('select[name="deskripsi"]').val(),
                 biaya:$('input[name="biaya"]').val().replace(/[^\w\s]/gi, '').slice(2),
                 date_out:$('input[name="date_out"]').val()
             }

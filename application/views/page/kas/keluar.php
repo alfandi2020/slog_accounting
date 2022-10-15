@@ -17,10 +17,10 @@
                                         <div class="col-xl-4 col-md-6 col-12 mb-1">
                                             <fieldset class="form-group">
                                             <label class="form-label" for="validationCustom01">Deskripsi</label>
-                                                <select class="form-control select2" name="deskripsi" id="">
+                                                <select class="form-control select2" name="deskripsi" id="deskripsi">
                                                     <?php $db = $this->db->get('mt_kas_keluar_desc')->result();
                                                         foreach ($db as $x) {?>
-                                                        <option value=""><?= $x->deskripsi ?></option>
+                                                        <option value="<?= $x->id?>"><?= $x->deskripsi ?></option>
                                                         <?php } ?>
                                                 </select>
                                             </fieldset>

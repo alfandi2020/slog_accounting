@@ -37,6 +37,7 @@ class M_KasKeluar extends CI_Model {
 
         $this->db->select(['*']);
         $this->db->from($this->kas_keluar);
+        $this->db->join('mt_kas_keluar_desc', 'kas_keluar.deskripsi = mt_kas_keluar_desc.id');
         if($searchQuery != '')
             $this->db->where($searchQuery);
         $this->db->where('MONTH(date_out)',$postData['month']);

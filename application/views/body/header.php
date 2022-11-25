@@ -41,6 +41,8 @@
     <!-- END: Custom CSS-->
 
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/vendors/css/tables/datatable/datatables.min.css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 </head>
 <!-- END: Head-->
 
@@ -292,8 +294,15 @@
 
                 <li class=" navigation-header"><span>Kas</span>
                 </li>
-				<li class="nav-item"><a href="#"><i class="feather icon-shopping-cart"></i><span class="menu-title" data-i18n="Ecommerce">Kas</span></a>
+				<li class="nav-item">
+                    <a href="#">
+                        <i class="feather icon-shopping-cart"></i>
+                        <span class="menu-title" data-i18n="Ecommerce">Kas</span>
+                    </a>
                     <ul class="menu-content">
+                        
+                        <li><a href="<?= base_url('kas/saldo') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Saldo</span></a>
+                        </li>
                         <li><a href="<?= base_url('kas/masuk') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Masuk</span></a>
                         </li>
                         <li><a href="<?= base_url('kas/keluar') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Keluar</span></a>

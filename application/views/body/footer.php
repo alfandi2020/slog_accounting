@@ -115,10 +115,7 @@
         }
     $(document).ready(function() {
         $('.select2').select2();
-    });
-      
-
-  
+    });  
 
     //kas masuk
     $(document).ready(function(){
@@ -428,7 +425,7 @@
         $(document).on("click", "#submit_kas_keluar", function(e){
             e.preventDefault();
             var data = {
-                deskripsi:$('input[name="deskripsi"]').val(),
+                deskripsi:$('select[name="deskripsi"]').val(),
                 biaya:$('input[name="biaya"]').val().replace(/[^\w\s]/gi, '').slice(2),
                 date_out:$('input[name="date_out"]').val()
             }
@@ -500,6 +497,7 @@
         
     });
     //end kas keluar
+    
     $(document).ready(function(){
         $(document).on("click", "#submit_desc_kas_keluar", function(e){
             e.preventDefault();
@@ -555,7 +553,22 @@
             return res;
         }
 
+        $("button").click(function(){
+            $("#table-report").table2excel({
+                exclude: ".noExl",
+                name: "Table2Excel",
+                filename: "table2excel",
+                fileext: ".xls",
+                exclude_img: true,
+                exclude_links: true,
+                exclude_inputs: true,
+                preserveColors: false
+            });
+        });
+
   
     </script>
+    
+    <script src="<?= base_url() ?>assets/js/scripts/jquery.table2excel.js"></script>
   </body>
 </html>

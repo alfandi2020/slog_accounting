@@ -6,13 +6,71 @@ class Kas extends CI_Controller {
 	public function __construct(){
         parent::__construct();
 		$this->load->helper(array('form', 'url'));
-        $this->load->model(array('M_KasMasuk','M_KasKeluar'));
+        $this->load->model(array('M_KasMasuk','M_KasKeluar','M_Saldo'));
 		$this->load->library('form_validation');
 		if ($this->session->userdata('username') == false) {
 			$this->session->set_flashdata("msg", "<div class='alert alert-danger'>Opss anda blm login</div>");
             redirect('auth');
 		}
     }
+
+	public function saldo() {
+
+		$tahun = $this->input->get('years_saldo');
+		$bulan = $this->input->get('months_saldo');
+
+		$bulan_sekarang = date('m');
+		$tahun_sekarang = date('Y');
+		
+		if ($bulan) {
+			if ($tahun) {
+				$sql_keluar = "SELECT SUM(biaya) as biaya FROM kas_keluar WHERE MONTH(date_out) = '$bulan' AND YEAR(date_out) = '$tahun'";
+				$sql_masuk = "SELECT SUM(total) as total FROM acc_kas_masuks WHERE MONTH(date_in) = '$bulan' AND YEAR(date_in) = '$tahun'";
+				// $this->db->where('MONTH(date_out)', $bulan);
+				// $this->db->where('YEAR(date_out)', $tahun);
+			} else {
+				$sql_keluar = "SELECT SUM(biaya) as biaya FROM kas_keluar WHERE MONTH(date_out) = '$bulan' AND YEAR(date_out) = '$tahun_sekarang'";
+				$sql_masuk = "SELECT SUM(total) as total FROM acc_kas_masuks WHERE MONTH(date_in) = '$bulan' AND YEAR(date_in) = '$tahun_sekarang'";
+				// $this->db->where('MONTH(date_out)', $bulan);
+			}
+		} else {
+			$sql_keluar = "SELECT SUM(biaya) as biaya FROM kas_keluar WHERE MONTH(date_out) = '$bulan_sekarang' AND YEAR(date_out) = '$tahun_sekarang'";
+			$sql_masuk = "SELECT SUM(total) as total FROM acc_kas_masuks WHERE MONTH(date_in) = '$bulan_sekarang' AND YEAR(date_in) = '$tahun_sekarang'";
+			// $this->db->where('MONTH(date_out)', $bulan_sekarang);
+			// $this->db->where('YEAR(date_out)', $tahun_sekarang);
+		}
+
+		$q = $this->db->query($sql_keluar);
+		$row = $q->row_array();
+
+		$q_masuk = $this->db->query($sql_masuk);
+		$row_masuk = $q_masuk->row_array();
+
+		$saldo_sekarang = (int) $row - (int) $row_masuk;
+
+		$data =[
+			"saldo_keluar" => $row,
+			"saldo_masuk" => $row_masuk,
+			"saldo_sekarang" => $saldo_sekarang
+		];
+
+		$this->load->view('body/header');
+		$this->load->view('page/kas/saldo', $data);
+		$this->load->view('body/footer');
+	}
+
+	public function hutang() {
+		$this->load->view('body/header');
+		$this->load->view('page/kas/hutang');
+		$this->load->view('body/footer');
+	}
+
+	public function piutang() {
+		$this->load->view('body/header');
+		$this->load->view('page/kas/piutang');
+		$this->load->view('body/footer');
+	}
+
 	public function masuk()
 	{
 		$data = [
@@ -140,6 +198,14 @@ class Kas extends CI_Controller {
         $data = $this->M_KasKeluar->ListKeluar($postData);
         echo json_encode($data);
     }
+
+	function getDataSaldo() {
+		$postData = $this->input->post();
+		$data = $this->M_Saldo->CekSaldo($postData);
+		// var_dump($postData);exit;
+		// $this->error($postData);
+		echo json_encode($data);
+	}
 
 	function ListInvoiceCustomer(){
 		$id = $this->input->post('id');

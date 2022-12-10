@@ -309,6 +309,20 @@
                         </li>
                     </ul>
                 </li>
+                <!-- <li class=" navigation-header"><span>Transaction</span>
+                </li> -->
+				<li class="nav-item">
+                    <a href="#">
+                        <i class="feather icon-shopping-cart"></i>
+                        <span class="menu-title" data-i18n="Ecommerce">Transaction</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li><a href="<?= base_url('kas/utang') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Shop">Utang</span></a>
+                        </li>
+                        <li><a href="<?= base_url('kas/piutang') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="Details">Piutang</span></a>
+                        </li>
+                    </ul>
+                </li>
                 <li class=" navigation-header"><span>Penggajian</span>
                 </li>
 				<li class="nav-item"><a href="#"><i class="feather icon-user"></i><span class="menu-title" data-i18n="Ecommerce">Penggajian</span></a>

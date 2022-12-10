@@ -134,17 +134,6 @@
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
-                                               
-                                                <!-- <tfoot>
-                                                    <tr>
-                                                        <th>Cabang</th>
-                                                        <th>Nama Customer</th>
-                                                        <th>Invoice</th>
-                                                        <th>Payment</th>
-                                                        <th>Status</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </tfoot> -->
                                             </table>
                                         </div>
                                     </div>
